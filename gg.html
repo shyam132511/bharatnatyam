@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What We Do at Kalabharanam</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #f7f6f3;
+      font-family: "Georgia", serif;
+      overflow-x: hidden;
+    }
+
+    .kalabharanam-section {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .kalabharanam-section h2 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #1e1e1e;
+      margin-bottom: 10px;
+    }
+
+    .kalabharanam-section h2 span {
+      color: #7b2c1f;
+    }
+
+    .kalabharanam-section p {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 50px;
+    }
+
+    .kalabharanam-section p .highlight {
+      color: #7b2c1f;
+      font-style: italic;
+    }
+
+    /* --- Default (Desktop) Grid --- */
+    .video-grid {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      flex-wrap: wrap;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .video-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 230px;
+      flex: 0 0 auto;
+      scroll-snap-align: center;
+    }
+
+    .video-item video {
+      width: 100%;
+      height: auto;
+      border-radius: 40px;
+      object-fit: cover;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .video-item:hover video {
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .video-item h3 {
+      font-size: 1rem;
+      color: #1e1e1e;
+      margin-top: 10px;
+    }
+
+    /* --- Mobile: Horizontal Scroll Gallery --- */
+    @media (max-width: 768px) {
+      .video-grid {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 20px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 10px;
+      }
+
+      .video-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .video-item {
+        width: 80%;
+        flex: 0 0 auto;
+      }
+    }
+
+    /* Smaller phones */
+    @media (max-width: 500px) {
+      .video-item {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="kalabharanam-section">
+    <h2>What We Do at <span>Kalabharanam</span></h2>
+    <p>Preserving the <span class="highlight">ancient</span> art form through structured learning and devotion.</p>
+
+    <div class="video-grid">
+      <div class="video-item">
+        <video src="video1.mp4" loop playsinline></video>
+        <h3>Nritya Vaibhavam</h3>
+      </div>
+      <div class="video-item">
+        <video src="video2.mp4" loop playsinline></video>
+        <h3>Abhinaya Arangam</h3>
+      </div>
+      <div class="video-item">
+        <video src="video2.mp4" loop playsinline></video>
+        <h3>Nritya Sutra</h3>
+      </div>
+      <div class="video-item">
+        <video src="video1.mp4" loop playsinline></video>
+        <h3>Natya Kala</h3>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.video-item video').forEach(video => {
+      // Play on hover (desktop) or touch (mobile)
+      video.addEventListener('mouseenter', () => {
+        video.currentTime = 0;
+        video.play().catch(err => console.log('Playback prevented:', err));
+      });
+      video.addEventListener('mouseleave', () => video.pause());
+
+      // For mobile: play on tap
+      video.addEventListener('touchstart', () => {
+        if (video.paused) video.play().catch(()=>{});
+        else video.pause();
+      });
+    });
+  </script>
+</body>
+</html>
